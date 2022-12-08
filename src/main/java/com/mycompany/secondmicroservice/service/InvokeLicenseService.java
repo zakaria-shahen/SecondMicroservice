@@ -1,27 +1,12 @@
 package com.mycompany.secondmicroservice.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@Service
-@RequiredArgsConstructor
-public class InvokeLicenseService {
+@FeignClient("firstmicroservice")
+public interface InvokeLicenseService {
 
-    private final RestTemplate restTemplate;
-
-    private String serviceId = "firstmicroservice";
-
-    public String invoke() {
-        String licenseServiceUrl = "http://" + serviceId + "/";
-
-        return restTemplate.exchange(
-                licenseServiceUrl,
-                HttpMethod.GET,
-                null,
-                String.class
-        ).getBody();
-    }
+    @GetMapping
+    String invoke();
 
 }
