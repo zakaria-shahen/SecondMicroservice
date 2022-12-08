@@ -13,6 +13,6 @@ public class HomeController {
     @GetMapping
     public Map<String, Object> get() {
 
-        return Map.of("massage", "Hello, Second Service");
+        return Map.of("message", "Hello, Second Service");
     }
 }
