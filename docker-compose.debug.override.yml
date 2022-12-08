@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  secondmicroservice:
+    ports:
+      - "5005:5005"
+    entrypoint: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005", "-Djava.security.egd=file:/dev/./urandom", "org.springframework.boot.loader.JarLauncher"]
+
