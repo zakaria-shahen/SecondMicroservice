@@ -2,8 +2,11 @@ version: "3.7"
 
 services:
   secondmicroservice:
-    image: mycompany/secondmicroservice:0.0.1-SNAPSHOT
+#    image: mycompany/secondmicroservice:0.0.1-SNAPSHOT
     container_name: second_microservice
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
       - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8071/
       - SPRING_CLOUD_CONFIG_TOKEN=myroot
