@@ -3,12 +3,13 @@ package com.mycompany.secondmicroservice.event.listener;
 import com.mycompany.secondmicroservice.event.listener.model.LicenseMessageEventModel;
 import com.mycompany.secondmicroservice.service.InvokeLicenseService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.function.Consumer;
 
 @Configuration
@@ -16,6 +17,7 @@ import java.util.function.Consumer;
 public class LicenseEventListener {
 
     private final CacheManager cacheManager;
+    private final Logger logger = LoggerFactory.getLogger(LicenseEventListener.class);
 
     @Bean
     public Consumer<LicenseMessageEventModel> createLicenseEventListener() {
@@ -30,7 +32,7 @@ public class LicenseEventListener {
         // };
 
         return model -> {
-            System.out.println("Message received from kafka:" + model);
+            logger.debug("Message received from kafka: {}", model);
             Cache cache = cacheManager.getCache(InvokeLicenseService.CACHE_LICENSE);
             if (cache == null) {
                 return;
