@@ -5,10 +5,7 @@ import com.mycompany.secondmicroservice.service.InvokeLicenseService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -32,6 +29,11 @@ public class HomeController {
 
         logger.debug("call invoke controller");
         return invokeLicenseService.invoke(id);
+    }
+
+    @PostMapping("/test")
+    public String test() {
+        return "Good";
     }
 
 }

@@ -1,5 +1,6 @@
 package com.mycompany.secondmicroservice.service;
 
+import com.mycompany.secondmicroservice.ConfigFeignSecurity;
 import com.mycompany.secondmicroservice.dto.LicenseDto;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
@@ -10,7 +11,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(InvokeLicenseService.SERVICE_NAME)
+@FeignClient(
+        value = InvokeLicenseService.SERVICE_NAME,
+        configuration = ConfigFeignSecurity.class
+)
 public interface InvokeLicenseService {
 
      String SERVICE_NAME = "firstMicroservice";
